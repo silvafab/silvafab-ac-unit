@@ -11,9 +11,24 @@ Api = Syro.new(ApiResponse) do
     end
   end
 
-  on 'devices/:serial/readings' do
-    post do
-      RegisterreadingService.run()
+  on 'devices' do
+    on :serial do
+      on 'readings' do
+        post do
+          begin
+          RegisterReadingService.run(
+            inbox[:serial],
+            req[:temperature],
+            req[:airHumidity],
+            req[:carbonMonoxide],
+            req[:healthStatus]
+          )
+          rescue RecordNotFound
+            res.status = 404
+            res.write ""
+          end
+        end
+      end
     end
   end
 end

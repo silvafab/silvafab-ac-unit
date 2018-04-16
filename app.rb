@@ -3,7 +3,7 @@ require 'dotenv/load'
 
 Dotenv.load
 
-components = "./{database,decks,models,routes,services}/*.rb"
+components = "./{database,decks,errors,models,routes,services}/*.rb"
 Dir[components].each { |file| require file }
 
 Web = Syro.new do

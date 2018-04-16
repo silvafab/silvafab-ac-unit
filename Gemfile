@@ -4,5 +4,7 @@ gem 'syro'
 gem 'sequel'
 gem 'pg'
 
+gem 'rake'
+
 gem 'dotenv', groups: [:development, :test]
 

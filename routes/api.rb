@@ -10,5 +10,11 @@ Api = Syro.new(ApiResponse) do
       json ""
     end
   end
+
+  on 'devices/:serial/readings' do
+    post do
+      RegisterreadingService.run()
+    end
+  end
 end
 

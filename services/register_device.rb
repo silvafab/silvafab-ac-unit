@@ -4,7 +4,8 @@ class RegisterDeviceService
       Device.unrestrict_primary_key
       Device.create(
         serial: serial_number,
-        firmware_version: firmware_version
+        firmware_version: firmware_version,
+        created_at: Time.now
       )
   end
 

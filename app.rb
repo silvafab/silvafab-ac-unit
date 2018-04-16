@@ -1,6 +1,9 @@
 require 'syro'
+require 'dotenv/load'
 
-components = "./{decks,routes}/*.rb"
+Dotenv.load
+
+components = "./{database,decks,routes}/*.rb"
 Dir[components].each { |file| require file }
 
 Web = Syro.new do

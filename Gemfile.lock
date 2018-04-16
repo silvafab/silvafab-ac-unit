@@ -1,0 +1,19 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rack (2.0.4)
+    seg (1.2.0)
+    sequel (5.7.1)
+    syro (3.1.0)
+      rack (>= 1.6.0)
+      seg
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  sequel
+  syro
+
+BUNDLED WITH
+   1.16.0

@@ -16,13 +16,21 @@ Api = Syro.new(ApiResponse) do
       on 'readings' do
         post do
           begin
-          RegisterReadingService.run(
-            inbox[:serial],
-            req[:temperature],
-            req[:airHumidity],
-            req[:carbonMonoxide],
-            req[:healthStatus]
-          )
+
+            if req[:temperature].is_a? Array
+              service = RegisterBulkReadingsService
+            else
+              service = RegisterReadingService
+            end
+
+            service.run(
+              inbox[:serial],
+              req[:temperature],
+              req[:airHumidity],
+              req[:carbonMonoxide],
+              req[:healthStatus]
+            )
+
           rescue RecordNotFound
             res.status = 404
             res.write ""

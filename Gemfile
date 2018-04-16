@@ -6,5 +6,5 @@ gem 'pg'
 
 gem 'rake'
 
-gem 'dotenv', groups: [:development, :test]
+gem 'dotenv'
 

@@ -2,7 +2,7 @@ class RegisterReadingService
   def self.run(serial, temp, air_humidity, carbon_monoxide, health)
     Reading.unrestrict_primary_key
 
-    device = Device[serial]
+    device = Device[serial.downcase]
     raise RecordNotFound unless device
 
     reading = Reading.create(

@@ -22,7 +22,7 @@
   <tbody>
     % devices.each do |device|
       <tr>
-        <th scope="row">{{ device.serial }}</th>
+        <th scope="row"><a href="devices/{{ device.serial }}"> {{ device.serial }} </a></th>
         <td>{{ device.firmware_version }}</td>
         <td>{{ device.created_at.strftime("%m/%d/%Y") }}</td>
         <td>{{ device[:health_status] }}</td>

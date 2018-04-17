@@ -18,5 +18,7 @@ end
 
 App = Rack::Builder.new do
   use Rack::MethodOverride
+  use Rack::Session::Cookie
+  
   run(Web)
 end

@@ -1,8 +1,10 @@
+require 'shield'
 require 'mote'
 require 'tas'
 
 class Frontend < Syro::Deck
-include Mote::Helpers
+  include Shield::Helpers
+  include Mote::Helpers
 
   def session
     req.session

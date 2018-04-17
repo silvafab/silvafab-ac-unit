@@ -7,6 +7,8 @@ gem 'pg'
 gem 'mote'
 gem 'tas'
 
+gem 'shield'
+
 gem 'rake'
 
 gem 'dotenv'

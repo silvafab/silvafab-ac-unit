@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    armor (0.0.3)
     dotenv (2.2.2)
     mote (1.3.0)
     pg (1.0.0)
@@ -8,6 +9,8 @@ GEM
     rake (12.3.1)
     seg (1.2.0)
     sequel (5.7.1)
+    shield (2.1.1)
+      armor
     syro (3.1.0)
       rack (>= 1.6.0)
       seg
@@ -22,6 +25,7 @@ DEPENDENCIES
   pg
   rake
   sequel
+  shield
   syro
   tas
 

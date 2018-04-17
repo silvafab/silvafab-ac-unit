@@ -26,7 +26,7 @@ Admin = Syro.new(Frontend) do
   on "users" do
     get do
       check_auth
-      admins = AdminUser.all
+      admins = AdminUser.order(:id).all
       render("views/admin/list_admins.mote", admins: admins)
     end
 
@@ -45,6 +45,16 @@ Admin = Syro.new(Frontend) do
         end
       end
 
+    end
+
+    on :id do
+      on "block" do
+        post do
+          check_auth
+          ToggleBlockedUserService.run(inbox[:id])
+          res.redirect '/admin/users'
+        end
+      end
     end
   end
 

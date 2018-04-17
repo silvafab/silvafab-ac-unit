@@ -3,12 +3,19 @@
   <thead>
     <tr>
       <th scope="col">Email</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     % admins.each do |admin|
       <tr>
         <th scope="row">{{ admin.email }}</th>
+        <td>
+          <form action="/admin/users/{{admin.id}}/block" method="post">
+            <input type="submit" value="{{ admin.blocked ? "Unblock" : "Block" }}" class="{{
+              admin.blocked ? "btn-success" : "btn-danger" }} btn" />
+          </form>
+        </td>
       </tr>
     % end
   </tbody>

@@ -3,8 +3,9 @@ Admin = Syro.new(Frontend) do
 
   on "devices" do
     get do
-      devices = ListDevicesService.run
-      render("views/admin/list_devices.mote", devices: devices)
+      params = Rack::Utils.parse_nested_query(req.query_string)
+      devices = ListDevicesService.run(params)
+      render("views/admin/list_devices.mote", devices: devices, params: params)
     end
   end
 

@@ -70,3 +70,17 @@ curl -X POST -d "temperature=25.1&airHumidity=24.1&carbonMonoxide=7.3&healthStat
 curl -X POST -d "temperature[]=25.1&temperature[]=26.8&airHumidity[]=24.1&airHumidity[]=24.5&carbonMonoxide[]=7.3&carbonMonoxide[]=9&healthStatus[]=working_normal&health_status=gas_leak" https://silvafab-ac-units.herokuapp.com/api/devices/123ABC/readings
 ```
 
+---
+
+#### GET /devices/attention_needed
+
+Handy endpoint for seeing how many units need to be inspected
+
+Takes no parameters :)
+
+
+###### cURL example
+
+```
+curl -X GET https://silvafab-ac-units.herokuapp.com/api/devices/attention_needed
+```

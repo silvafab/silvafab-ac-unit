@@ -1,10 +1,14 @@
-
 Admin = Syro.new(Frontend) do
   page[:title] = "Welcome"
 
   on "devices" do
-
     get do
+
+      unless authenticated(AdminUser)
+        message = "You must log in first"
+        res.redirect "/admin/sign_in?message=#{message}"
+      end
+
       params = Rack::Utils.parse_nested_query(req.query_string)
       devices = ListDevicesService.run(params)
       render("views/admin/list_devices.mote", devices: devices, params: params)
@@ -12,6 +16,12 @@ Admin = Syro.new(Frontend) do
 
     on :serial do
       get do
+
+        unless authenticated(AdminUser)
+          message = "You must log in first"
+          res.redirect "/admin/sign_in?message=#{message}"
+        end
+
         params = Rack::Utils.parse_nested_query(req.query_string)
         result = ShowDeviceReadingsService.run(inbox[:serial], params)
         render("views/admin/show_device_readings.mote", device: result[:device], time_period: params['period'], readings: result[:readings], date_from: result[:date_from], date_to: result[:date_to])
@@ -21,7 +31,8 @@ Admin = Syro.new(Frontend) do
 
   on "sign_in" do
     get do
-      render("views/admin/sign_in.mote")
+      params = Rack::Utils.parse_nested_query(req.query_string)
+      render("views/admin/sign_in.mote", message: params['message'])
     end
 
     post do

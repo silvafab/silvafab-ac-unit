@@ -10,6 +10,10 @@ Web = Syro.new do
   on 'api' do
     run(Api)
   end
+
+  on 'admin' do
+    run(Admin)
+  end
 end
 
 App = Rack::Builder.new do

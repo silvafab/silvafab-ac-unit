@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-5" align="center">
+      <h3>Unit: {{ device.serial }} </h3>
+      <p>Date registered: {{ device.created_at.strftime("%m/%d/%Y") }}</p>
+      <p>Firmware version: {{ device.firmware_version }}</p>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-5" align="center">
+      <form>
+        Show readings for: <select name="period">
+          <option value="today" {{ time_period == 'today' ? "selected" : '' }}>Today</option>
+          <option value="week" {{ time_period == 'week' ? "selected" : '' }}>This week</option>
+          <option value="month" {{ time_period == 'month' ? "selected" : '' }}>This month</option>
+          <option value="year" {{ time_period == 'year' ? "selected" : '' }}>This year</option>
+        </select>
+        <input class="btn btn-primary" type="submit" value="Display"/>
+      </form>
+      <canvas id="myChart" width="200" height="200"></canvas>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+
+<script>
+  var ctx = document.getElementById("myChart");
+  var labels ={{ readings.map { |r| r.created_at.strftime("%m/%d/%Y %H:%M:%S") } }};
+
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Temperature',
+            data: {{ readings.map(&:temperature) }},
+            borderWidth: 2,
+            borderColor: 'rgba(100, 0, 0, 1)',
+            backgroundColor: 'rgba(100, 0, 0, 1)',
+            fill: false
+        },
+        {
+            label: 'Air Humidity %',
+            data: {{ readings.map(&:air_humidity) }},
+            borderWidth: 2,
+            borderColor: 'rgba(0, 100, 0, 1)',
+            backgroundColor: 'rgba(0, 100, 0, 1)',
+            fill: false
+        },
+        {
+            label: 'Carbon Monoxide',
+            data: {{ readings.map(&:carbon_monoxide) }},
+            borderWidth: 2,
+            borderColor: 'rgba(0, 0, 100, 1)',
+            backgroundColor: 'rgba(0, 0, 100, 1)',
+            fill: false
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>

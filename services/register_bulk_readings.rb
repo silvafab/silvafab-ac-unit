@@ -2,7 +2,7 @@ class RegisterBulkReadingsService
   def self.run(serial, temp, air_humidity, carbon_monoxide, health)
     Reading.unrestrict_primary_key
 
-    device = Device[serial]
+    device = Device[serial.downcase]
     raise RecordNotFound unless device
 
     last_time_reported = device.readings.last&.created_at

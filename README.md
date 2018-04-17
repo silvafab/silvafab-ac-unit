@@ -38,7 +38,8 @@ curl -X POST -d "serialNumber=123ABC&firmwareVersion=23.15" https://silvafab-ac-
 
 #### POST: /devices/:serialNumber/readings
 
-Used for AC units to send readings from their sensors
+Used for AC units to send readings from their sensors. If bulk readings are going to be sent, the
+API assumes all fields are arrays, and they all have the same amount of items.
 
 ###### Request
 
@@ -62,3 +63,10 @@ Parameters:
 ```
 curl -X POST -d "temperature=25.1&airHumidity=24.1&carbonMonoxide=7.3&healthStatus=working_normal" https://silvafab-ac-units.herokuapp.com/api/devices/123ABC/readings
 ```
+
+###### cURL example for bulk sending
+
+```
+curl -X POST -d "temperature[]=25.1&temperature[]=26.8&airHumidity[]=24.1&airHumidity[]=24.5&carbonMonoxide[]=7.3&carbonMonoxide[]=9&healthStatus[]=working_normal&health_status=gas_leak" https://silvafab-ac-units.herokuapp.com/api/devices/123ABC/readings
+```
+

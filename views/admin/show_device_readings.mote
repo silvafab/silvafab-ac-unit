@@ -48,7 +48,7 @@
         },
         {
             label: 'Air Humidity %',
-            data: {{ readings.map(&:air_humidity) }},
+            data: {{ readings.map { |r| r.air_humidity.to_f } }},
             borderWidth: 2,
             borderColor: 'rgba(0, 100, 0, 1)',
             backgroundColor: 'rgba(0, 100, 0, 1)',
@@ -56,7 +56,7 @@
         },
         {
             label: 'Carbon Monoxide',
-            data: {{ readings.map(&:carbon_monoxide) }},
+            data: {{ readings.map { |r| r.carbon_monoxide.to_f } }},
             borderWidth: 2,
             borderColor: 'rgba(0, 0, 100, 1)',
             backgroundColor: 'rgba(0, 0, 100, 1)',

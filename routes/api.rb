@@ -12,6 +12,11 @@ Api = Syro.new(ApiResponse) do
   end
 
   on 'devices' do
+    on 'attention_needed' do
+      get do
+        res.write CheckUnitsNeedingServiceService.run
+      end
+    end
     on :serial do
       on 'readings' do
         post do
@@ -38,6 +43,7 @@ Api = Syro.new(ApiResponse) do
         end
       end
     end
+
   end
 end
 

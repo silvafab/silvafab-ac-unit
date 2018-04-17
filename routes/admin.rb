@@ -4,10 +4,7 @@ Admin = Syro.new(Frontend) do
   on "devices" do
     get do
 
-      unless authenticated(AdminUser)
-        message = "You must log in first"
-        res.redirect "/admin/sign_in?message=#{message}"
-      end
+      check_auth
 
       params = Rack::Utils.parse_nested_query(req.query_string)
       devices = ListDevicesService.run(params)
@@ -17,10 +14,7 @@ Admin = Syro.new(Frontend) do
     on :serial do
       get do
 
-        unless authenticated(AdminUser)
-          message = "You must log in first"
-          res.redirect "/admin/sign_in?message=#{message}"
-        end
+        check_auth
 
         params = Rack::Utils.parse_nested_query(req.query_string)
         result = ShowDeviceReadingsService.run(inbox[:serial], params)
@@ -29,17 +23,40 @@ Admin = Syro.new(Frontend) do
     end
   end
 
+  on "users" do
+    get do
+      check_auth
+      admins = AdminUser.all
+      render("views/admin/list_admins.mote", admins: admins)
+    end
+
+    on "new" do
+      get do
+        check_auth
+        message = session[:message]
+        render("views/admin/new_user.mote", message: message)
+      end
+      
+      post do
+        result = NewAdminUserService.run(req[:email], req[:password])
+        unless result
+          session[:message] = "Email taken"
+          res.redirect '/admin/users/new'
+        end
+      end
+
+    end
+  end
+
   on "sign_in" do
     get do
-      params = Rack::Utils.parse_nested_query(req.query_string)
-      render("views/admin/sign_in.mote", message: params['message'])
+      render("views/admin/sign_in.mote", message: session[:message])
     end
 
     post do
-      message = ""
       if login(AdminUser, req[:email], req[:password]).nil?
-        message = "Wrong username/password"
-        res.redirect "/admin/sign_in?message=#{message}"
+        session[:message] = "Wrong username/password"
+        res.redirect "/admin/sign_in"
       else
         res.redirect '/admin/devices'
       end

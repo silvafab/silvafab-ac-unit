@@ -8,6 +8,7 @@ gem 'mote'
 gem 'tas'
 
 gem 'shield'
+gem 'scrivener'
 
 gem 'rake'
 

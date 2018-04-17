@@ -30,4 +30,11 @@ class Frontend < Syro::Deck
 
     res.html(page)
   end
+
+  def check_auth
+    unless authenticated(AdminUser)
+      session[:message] = "You must log in first"
+      res.redirect "/admin/sign_in"
+    end
+  end
 end

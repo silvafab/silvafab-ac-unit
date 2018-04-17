@@ -4,11 +4,7 @@
     <input type="text" name="serial" class="form-control" id="serial" placeholder="Serial #" {{
       params['serial'].nil? ? '' : "value=#{params['serial']}" }}>
   </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="showWarnings">
-    <label class="form-check-label" for="checkbox">Show warnings only</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Search</button>
 </form>
 <table class="table">
   <thead>
@@ -21,7 +17,7 @@
   </thead>
   <tbody>
     % devices.each do |device|
-      <tr>
+      <tr {{ device.show_alert ? "class='bg-danger'" : '' }}>
         <th scope="row"><a href="devices/{{ device.serial }}"> {{ device.serial }} </a></th>
         <td>{{ device.firmware_version }}</td>
         <td>{{ device.created_at.strftime("%m/%d/%Y") }}</td>

@@ -1,5 +1,7 @@
 % if message
-  {{ message }}
+  <div class="alert alert-danger" role="alert">
+    {{ message }}
+  </div>
 % end
 <form method="POST">
 

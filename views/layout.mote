@@ -7,11 +7,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
   </head>
   <body>
-    <form action="/admin/sign_out" method="post">
-      <input type="submit" value="Sign out" />
-    </form>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">AC Units</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/devices">Units</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/users">Users</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="/admin/sign_out" method="post">
+          <input type="submit" value="Sign out" class="btn btn-outline-success my-2 my-sm-0" />
+        </form>
+      </div>
+    </nav>
+
+
     <section>
-      <div id="notification" style="display: none;">
+      <div id="notification" class="alert alert-danger" role="alert" style="display: none;">
         There are units that require attention!
       </div>
       {{ content }}
@@ -20,26 +43,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
-  <script>
-    $(document).ready(function() {
-      check_attention();
-
-      setInterval(function(){
+    <script>
+      $(document).ready(function() {
         check_attention();
-      }, 5000);
 
-      function check_attention(){
-        jQuery.get( "/api/devices/attention_needed", function( data ) {
-          console.log(data);
-          if(data > 0)
-            $( "#notification" ).show();
-          else
-            $( "#notification" ).hide();
+        setInterval(function(){
+          check_attention();
+        }, 5000);
 
-        });
-      }
+        function check_attention(){
+          jQuery.get( "/api/devices/attention_needed", function( data ) {
+            console.log(data);
+            if(data > 0)
+              $( "#notification" ).show();
+            else
+              $( "#notification" ).hide();
 
-    })
-  </script>
+          });
+        }
+
+      })
+    </script>
   </body>
 </html>

@@ -18,7 +18,7 @@ end
 
 App = Rack::Builder.new do
   use Rack::MethodOverride
-  use Rack::Session::Cookie
+  use Rack::Session::Cookie, secret: "CitrusByteSecret"
   
   run(Web)
 end

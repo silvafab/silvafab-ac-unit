@@ -1,5 +1,11 @@
 # Smart AC Unit
 
+## Admin site
+
+Can be accesed at https://silvafab-ac-units.herokuapp.com/admin
+
+There's a default user, email: admin@example.com, password: password
+
 ## API endpoints
 
 ##### NOTE

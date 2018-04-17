@@ -1,3 +1,15 @@
+<form>
+  <div class="form-group">
+    <label for="serial">Serial #</label>
+    <input type="text" name="serial" class="form-control" id="serial" placeholder="Serial #" {{
+      params['serial'].nil? ? '' : "value=#{params['serial']}" }}>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="showWarnings">
+    <label class="form-check-label" for="checkbox">Show warnings only</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 <table class="table">
   <thead>
     <tr>

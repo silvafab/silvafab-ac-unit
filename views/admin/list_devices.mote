@@ -1,1 +1,20 @@
-This here be the list of devices
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Serial #</th>
+      <th scope="col">Firmware version</th>
+      <th scope="col">Date registered</th>
+      <th scope="col">Health status</th>
+    </tr>
+  </thead>
+  <tbody>
+    % devices.each do |device|
+      <tr>
+        <th scope="row">{{ device.serial }}</th>
+        <td>{{ device.firmware_version }}</td>
+        <td>{{ device.created_at.strftime("%m/%d/%Y") }}</td>
+        <td>{{ device[:health_status] }}</td>
+      </tr>
+    % end
+  </tbody>
+</table>

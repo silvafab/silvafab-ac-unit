@@ -3,7 +3,8 @@ Admin = Syro.new(Frontend) do
 
   on "devices" do
     get do
-      render("views/admin/list_devices.mote")
+      devices = ListDevicesService.run
+      render("views/admin/list_devices.mote", devices: devices)
     end
   end
 

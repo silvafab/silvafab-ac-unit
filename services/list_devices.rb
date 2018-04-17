@@ -1,6 +1,6 @@
 class ListDevicesService
   def self.run(params)
-    serial = "%#{params['serial']}%"
+    serial = "%#{params['serial']&.downcase}%"
     Device.with_sql("SELECT devices.*, readings.health_status, readings.carbon_monoxide "\
     "FROM devices "\
     "INNER JOIN readings on devices.serial = readings.serial "\

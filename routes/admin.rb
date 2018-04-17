@@ -41,8 +41,9 @@ Admin = Syro.new(Frontend) do
         result = NewAdminUserService.run(req[:email], req[:password])
         unless result
           session[:message] = "Email taken"
-          res.redirect '/admin/users'
+          res.redirect '/admin/users/new'
         end
+        res.redirect '/admin/users'
       end
 
     end

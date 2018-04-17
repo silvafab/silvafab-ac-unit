@@ -5,7 +5,7 @@
 % end
 <form method="POST">
 
-  <input type="text" name="email"/>
-  <input type="password" name="password"/>
+ Email: <input type="text" name="email"/> <br />
+ Password: <input type="password" name="password"/> <br />
   <input type="submit" value="Let's go!"/>
 </form>

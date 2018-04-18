@@ -2,7 +2,7 @@
 
 ## Admin site
 
-Can be accesed at https://silvafab-ac-units.herokuapp.com/admin
+Can be accesed at https://silvafab-ac-units.herokuapp.com/admin/sign_in
 
 There's a default user, email: admin@example.com, password: password
 

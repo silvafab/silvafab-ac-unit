@@ -1,5 +1,9 @@
 # Smart AC Unit
 
+## NOTE
+
+This was a take-home assessment for a job application. The links no longer work, but the code is available to review, and the functionality is easy to understand from a glance
+
 ## Admin site
 
 Can be accesed at https://silvafab-ac-units.herokuapp.com/admin/sign_in
